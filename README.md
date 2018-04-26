@@ -1,2 +1,2 @@
-# no-cache
-But it's for cache.
+# to-cache
+Just to cache.
