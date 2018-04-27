@@ -11,7 +11,7 @@ declare class Cache {
      * @returns {boolean}
      * @memberof Cache
      */
-    has(key: any): boolean;
+    has(key: string): boolean;
     /**
      * 根据key获取缓存值
      *
@@ -19,7 +19,7 @@ declare class Cache {
      * @returns {any}
      * @memberof Cache
      */
-    get(key: any): any;
+    get(key: string): any;
     /**
      * 从缓存获取数据，如果不存在，则通过方法获取并缓存
      *
@@ -29,7 +29,7 @@ declare class Cache {
      * @returns {Promise<any>}
      * @memberof Cache
      */
-    getAndCache(key: any, fn: any, expires?: number): any;
+    getAndCache(key: string, fn: ()=> Promise<any>, expires?: number): any;
     /**
      * 设置缓存数据
      *
@@ -38,7 +38,7 @@ declare class Cache {
      * @param {number} [expires=0] 有效期
      * @memberof Cache
      */
-    set(key: any, value: any, expires?: number): void;
+    set(key: string, value: any, expires?: number): void;
     /**
      * 根据key删除缓存
      *
@@ -46,7 +46,7 @@ declare class Cache {
      * @returns {boolean}
      * @memberof Cache
      */
-    del(key: any): boolean;
+    del(key: string): boolean;
     /**
      * 获取所有缓存的key
      *
