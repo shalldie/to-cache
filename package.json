@@ -2,8 +2,11 @@
   "name": "to-cache",
   "version": "0.0.1",
   "description": "Just to cache >_<#@!",
-  "main": "index.js",
+  "main": "./dist/to-cache.js",
   "scripts": {
+    "release": "npm run build & npm run uglify",
+    "uglify": "cross-env NODE_ENV=production rollup -c",
+    "build": "cross-env NODE_ENV=development rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +21,14 @@
   "bugs": {
     "url": "https://github.com/shalldie/to-cache/issues"
   },
-  "homepage": "https://github.com/shalldie/to-cache#readme"
+  "homepage": "https://github.com/shalldie/to-cache#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.1.4",
+    "rollup": "^0.58.2",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-uglify": "^3.0.0"
+  }
 }

@@ -5,9 +5,12 @@
  */
 class Cache {
 
-    constructor() {
-        this._map = {};
-    }
+    /**
+     * 存储所有缓存
+     *
+     * @memberof Cache
+     */
+    _map = {}
 
     /**
      * 是否包含某缓存
@@ -63,7 +66,7 @@ class Cache {
      */
     set(key, value, expires = 0) {
         this.del(key);
-        let item = { value };
+        let item = {value};
         if (expires > 0) {
             item.timer = setTimeout(() => {
                 this.del(key);
@@ -86,6 +89,8 @@ class Cache {
         clearTimeout(this._map[key].timer);
         delete this._map[key];
     }
+
+    Cache = Cache
 }
 
-module.exports = new Cache();
+export default new Cache();
