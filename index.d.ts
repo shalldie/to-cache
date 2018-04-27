@@ -3,15 +3,7 @@
  *
  * @class Cache
  */
-class Cache {
-
-    /**
-     * 存储所有缓存
-     *
-     * @memberof Cache
-     */
-    _map = {}
-
+declare class Cache {
     /**
      * 是否包含某缓存
      *
@@ -19,10 +11,7 @@ class Cache {
      * @returns {boolean}
      * @memberof Cache
      */
-    has(key) {
-        return this._map.hasOwnProperty(key);
-    }
-
+    has(key: any): boolean;
     /**
      * 根据key获取缓存值
      *
@@ -30,13 +19,7 @@ class Cache {
      * @returns {any}
      * @memberof Cache
      */
-    get(key) {
-        if (this.has(key)) {
-            return this._map[key].value;
-        }
-        return null;
-    }
-
+    get(key: any): any;
     /**
      * 从缓存获取数据，如果不存在，则通过方法获取并缓存
      *
@@ -46,16 +29,7 @@ class Cache {
      * @returns {Promise<any>}
      * @memberof Cache
      */
-    getAndCache(key, fn, expires = 0) {
-        if (this.has(key)) {
-            return this.get(key);
-        }
-        return fn().then(value => {
-            this.set(key, value, expires);
-            return value;
-        });
-    }
-
+    getAndCache(key: any, fn: any, expires?: number): any;
     /**
      * 设置缓存数据
      *
@@ -64,17 +38,7 @@ class Cache {
      * @param {number} [expires=0] 有效期
      * @memberof Cache
      */
-    set(key, value, expires = 0) {
-        this.del(key);
-        let item = {value};
-        if (expires > 0) {
-            item.timer = setTimeout(() => {
-                this.del(key);
-            }, expires);
-        }
-        this._map[key] = item;
-    }
-
+    set(key: any, value: any, expires?: number): void;
     /**
      * 根据key删除缓存
      *
@@ -82,50 +46,34 @@ class Cache {
      * @returns {boolean}
      * @memberof Cache
      */
-    del(key) {
-        if (!this.has(key)) {
-            return false;
-        }
-        clearTimeout(this._map[key].timer);
-        delete this._map[key];
-        return true;
-    }
-
+    del(key: any): boolean;
     /**
      * 获取所有缓存的key
      *
      * @returns {Array<string>}
      * @memberof Cache
      */
-    keys() {
-        return Object.keys(this._map);
-    }
-
+    keys(): string[];
     /**
      * 获取缓存数量
      *
      * @returns {number}
      * @memberof Cache
      */
-    size() {
-        return this.keys().length;
-    }
-
+    size(): number;
     /**
      * 清空所有缓存
      *
      * @memberof Cache
      */
-    clear() {
-        this._map = {};
-    }
-
+    clear(): void;
     /**
      * 获取缓存的构造函数
      *
      * @memberof Cache
      */
-    Cache = Cache
+    Cache: typeof Cache;
 }
 
-export default new Cache();
+declare const cache: Cache;
+export default cache;

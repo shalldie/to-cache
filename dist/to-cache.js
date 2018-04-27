@@ -64,21 +64,23 @@
              * 从缓存获取数据，如果不存在，则通过方法获取并缓存
              *
              * @param {string} key 缓存的key
-             * @param {number} expires 有效期
-             * @param {Function} fn 生成缓存的回掉
+             * @param { ()=> Promise<any> } fn 生成缓存的回掉
+             * @param {number} [expires=0] 有效期
              * @returns {Promise<any>}
              * @memberof Cache
              */
 
         }, {
             key: "getAndCache",
-            value: function getAndCache(key, expires, fn) {
+            value: function getAndCache(key, fn) {
                 var _this = this;
+
+                var expires = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
                 if (this.has(key)) {
                     return this.get(key);
                 }
-                return Promise.resolve(fn()).then(function (value) {
+                return fn().then(function (value) {
                     _this.set(key, value, expires);
                     return value;
                 });
@@ -114,7 +116,7 @@
              * 根据key删除缓存
              *
              * @param {string} key 缓存的key
-             * @returns
+             * @returns {boolean}
              * @memberof Cache
              */
 
@@ -122,11 +124,57 @@
             key: "del",
             value: function del(key) {
                 if (!this.has(key)) {
-                    return;
+                    return false;
                 }
                 clearTimeout(this._map[key].timer);
                 delete this._map[key];
+                return true;
             }
+
+            /**
+             * 获取所有缓存的key
+             *
+             * @returns {Array<string>}
+             * @memberof Cache
+             */
+
+        }, {
+            key: "keys",
+            value: function keys() {
+                return Object.keys(this._map);
+            }
+
+            /**
+             * 获取缓存数量
+             *
+             * @returns {number}
+             * @memberof Cache
+             */
+
+        }, {
+            key: "size",
+            value: function size() {
+                return this.keys().length;
+            }
+
+            /**
+             * 清空所有缓存
+             *
+             * @memberof Cache
+             */
+
+        }, {
+            key: "clear",
+            value: function clear() {
+                this._map = {};
+            }
+
+            /**
+             * 获取缓存的构造函数
+             *
+             * @memberof Cache
+             */
+
         }]);
 
         return Cache;
