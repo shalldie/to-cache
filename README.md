@@ -1,6 +1,7 @@
 # to-cache
 
 [![NPM version](https://img.shields.io/npm/v/to-cache.svg)](https://www.npmjs.com/package/to-cache)
+[![Build Status](https://travis-ci.org/shalldie/to-cache.svg?branch=master)](https://travis-ci.org/shalldie/to-cache)
 
 Just to cache.
 
