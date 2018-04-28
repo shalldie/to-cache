@@ -29,7 +29,7 @@ declare class Cache {
      * @returns {Promise<any>}
      * @memberof Cache
      */
-    getAndCache(key: string, fn: ()=> Promise<any>, expires?: number): any;
+    getAndCache(key: string, fn: ()=> Promise<any>, expires?: number): Promise<any>;
     /**
      * 设置缓存数据
      *
