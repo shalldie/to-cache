@@ -13,7 +13,7 @@ Just to cache.
 
 ```js
 // var cache = window.toCache;
-// const cache = require('to-cache').default;
+// const cache = require('to-cache');
 import cache from 'to-cache';
 
 cache.set(

@@ -76,4 +76,4 @@ declare class Cache {
 }
 
 declare const cache: Cache;
-export default cache;
+export = cache;
