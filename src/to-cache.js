@@ -34,7 +34,7 @@ class Cache {
         if (this.has(key)) {
             return this._map[key].value;
         }
-        return null;
+        return undefined;
     }
 
     /**

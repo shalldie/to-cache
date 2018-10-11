@@ -15,7 +15,7 @@ describe('test cache.', function () {
         expect(cache.get('age')).to.be.equal(12);
 
         setTimeout(() => {
-            expect(cache.get('age')).to.be.equal(null);
+            expect(cache.get('age')).to.be.equal(undefined);
             next();
         }, 501);
     });
@@ -66,7 +66,7 @@ describe('test cache.', function () {
         }, 100 + 399);
 
         setTimeout(() => {
-            expect(cache.get('name')).to.be.equal(null);
+            expect(cache.get('name')).to.be.equal(undefined);
             next();
             // 额外加了10ms，少许误差
         }, 100 + 401 + 10);

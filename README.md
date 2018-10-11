@@ -28,8 +28,15 @@ cache.set(
 console.log(cache.get('userInfo').name); // 'tom'
 
 setTimeout(() => {
-    console.log(cache.get('userInfo')); // null
+    console.log(cache.get('userInfo')); // undefined
 }, 1001);
+
+// from async function data
+// ...
+let asyncData = await cache.getAndCache('asyncData', () =>
+    axios.get('http://xxx')
+);
+console.log(asyncData === cache.get('asyncData')); //  true
 
 // a new instance.
 let newCache = new cache.Cache();
@@ -64,7 +71,7 @@ get(key: string): any;
  * @returns {Promise<any>}
  * @memberof Cache
  */
-getAndCache(key: string, fn: ()=> Promise<any>, expires?: number): any;
+getAndCache(key: string, fn: ()=> Promise<any>, expires?: number): Promise<any>;
 /**
  * 设置缓存数据
  *
