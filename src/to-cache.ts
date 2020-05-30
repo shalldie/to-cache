@@ -49,7 +49,7 @@ export class ToCache {
      * @returns
      * @memberof ToCache
      */
-    getAndCache<T>(key: string, fn: () => Promise<T>, expires = 0) {
+    getAndCache<T>(key: string, fn: () => Promise<T>, expires = 0): Promise<T> {
         if (!this.has(key)) {
             const fnp = fn();
             this.set(key, fnp, expires);
@@ -58,7 +58,7 @@ export class ToCache {
             });
         }
 
-        return this.get(key);
+        return this.get(key) as Promise<T>;
     }
 
     /**
