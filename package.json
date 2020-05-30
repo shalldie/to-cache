@@ -2,12 +2,15 @@
   "name": "to-cache",
   "version": "0.0.8",
   "description": "Just to cache >_<#@!",
-  "main": "./dist/to-cache.js",
+  "main": "dist/to-cache.js",
+  "types": "dist/to-cache.d.ts",
   "scripts": {
-    "release": "npm run build & npm run uglify",
-    "uglify": "cross-env NODE_ENV=production rollup -c",
-    "build": "cross-env NODE_ENV=development rollup -c",
-    "test": "mocha"
+    "build": "tsc",
+    "lint": "eslint --ext .js,.ts ./src",
+    "test": "jest"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   },
   "repository": {
     "type": "git",
@@ -17,20 +20,14 @@
     "cache"
   ],
   "author": "shalldie",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/shalldie/to-cache/issues"
   },
   "homepage": "https://github.com/shalldie/to-cache#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "chai": "^4.1.2",
-    "cross-env": "^5.1.4",
-    "mocha": "^5.1.1",
-    "rollup": "^0.58.2",
-    "rollup-plugin-babel": "^3.0.4",
-    "rollup-plugin-uglify": "^3.0.0"
+    "@nosaid/eslint-config-for-typescript": "0.0.5",
+    "@nosaid/jest": "0.0.2",
+    "typescript": "^3.9.3"
   }
 }
