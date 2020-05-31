@@ -1,10 +1,9 @@
 /**
  * 缓存模块
  *
- * @export
  * @class ToCache
  */
-export declare class ToCache {
+declare class ToCache {
     /**
      * 存储所有缓存
      *
@@ -28,7 +27,7 @@ export declare class ToCache {
      * @returns
      * @memberof ToCache
      */
-    get<T = any>(key: string): T | undefined;
+    get<T>(key: string): T | undefined;
     /**
      * 从缓存获取数据，如果不存在，则通过方法获取并缓存
      *
@@ -39,7 +38,7 @@ export declare class ToCache {
      * @returns
      * @memberof ToCache
      */
-    getAndCache<T>(key: string, fn: () => Promise<T>, expires?: number): any;
+    getAndCache<T>(key: string, fn: () => Promise<T>, expires?: number): Promise<T>;
     /**
      * 设置缓存数据
      *
@@ -76,6 +75,12 @@ export declare class ToCache {
      * @memberof ToCache
      */
     clear(): void;
+    /**
+     * 原始构造函数
+     *
+     * @memberof ToCache
+     */
+    ToCache: typeof ToCache;
 }
 declare const _default: ToCache;
 export default _default;

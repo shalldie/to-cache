@@ -1,10 +1,9 @@
 /**
  * 缓存模块
  *
- * @export
  * @class ToCache
  */
-export class ToCache {
+class ToCache {
     /**
      * 存储所有缓存
      *
@@ -32,7 +31,7 @@ export class ToCache {
      * @returns
      * @memberof ToCache
      */
-    get<T = any>(key: string) {
+    public get<T>(key: string) {
         if (this.has(key)) {
             return this._map[key].value as T;
         }
@@ -49,7 +48,7 @@ export class ToCache {
      * @returns
      * @memberof ToCache
      */
-    getAndCache<T>(key: string, fn: () => Promise<T>, expires = 0) {
+    public getAndCache<T>(key: string, fn: () => Promise<T>, expires = 0): Promise<T> {
         if (!this.has(key)) {
             const fnp = fn();
             this.set(key, fnp, expires);
@@ -58,7 +57,7 @@ export class ToCache {
             });
         }
 
-        return this.get(key);
+        return this.get(key) as Promise<T>;
     }
 
     /**
@@ -69,7 +68,7 @@ export class ToCache {
      * @param {number} [expires=0] 有效期
      * @memberof ToCache
      */
-    set(key: string, value: any, expires = 0) {
+    public set(key: string, value: any, expires = 0) {
         if (this.has(key)) {
             clearTimeout(this._map[key].timer);
         }
@@ -92,7 +91,7 @@ export class ToCache {
      * @param {string} key 缓存的key
      * @memberof ToCache
      */
-    del(key: string) {
+    public del(key: string) {
         clearTimeout(this._map[key]?.timer);
         delete this._map[key];
     }
@@ -103,7 +102,7 @@ export class ToCache {
      * @returns {string[]}
      * @memberof ToCache
      */
-    keys(): string[] {
+    public keys(): string[] {
         return Object.keys(this._map);
     }
 
@@ -113,7 +112,7 @@ export class ToCache {
      * @returns {number}
      * @memberof ToCache
      */
-    size(): number {
+    public size(): number {
         return this.keys().length;
     }
 
@@ -122,11 +121,18 @@ export class ToCache {
      *
      * @memberof ToCache
      */
-    clear() {
+    public clear() {
         for (const key of this.keys()) {
             this.del(key);
         }
     }
+
+    /**
+     * 原始构造函数
+     *
+     * @memberof ToCache
+     */
+    public ToCache = ToCache;
 }
 
 export default new ToCache();
