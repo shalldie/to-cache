@@ -1,7 +1,7 @@
 # to-cache
 
 [![NPM version](https://img.shields.io/npm/v/to-cache.svg)](https://www.npmjs.com/package/to-cache)
-[![Build Status](https://travis-ci.org/shalldie/to-cache.svg?branch=master)](https://travis-ci.org/shalldie/to-cache)
+[![Build Status](https://github.com/shalldie/to-cache/actions/workflows/node.js.yml/badge.svg)](https://github.com/shalldie/to-cache/actions)
 
 Just to cache.
 
